@@ -11,8 +11,8 @@
 #CMD [ "npm", "start" ]
 FROM node:alpine
 WORKDIR /app
-COPY ./package.json .
+COPY ./src/package.json .
 RUN npm install
 COPY . .
 ENV PATH=$PATH:/app/node_modules/.bin
-CMD [ "nodemon", "/app/app.js" ]
+CMD [ "nodemon", "/app/src/app.js" ]

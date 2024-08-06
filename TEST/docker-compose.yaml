@@ -1,0 +1,7 @@
+#version: "3.9" # no need to specify in recent version
+services:
+  a:
+    image: alpine
+    command: ["ls"]
+  b:
+    build: .

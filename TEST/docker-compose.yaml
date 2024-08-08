@@ -2,8 +2,14 @@
 services:
   a:
     image: alpine
-    command: ["ls"]
+    command: ["ping" ,"goole.fr"]
   b:
+    links:
+      - "a: salut"
+    env_file:
+      - .env
+    environment:
+      - USER
     build: 
       context: ./backend
       dockerfile: Dockerfile
@@ -18,8 +24,17 @@ services:
         target: /app/datavolume
       - type: volume
         target: /app/datavolumeanonymous
+    networks:
+      - 'frontend'
     
   
 volumes:
   datavolume:
    # external: true
+
+networks:
+  frontend:
+    driver: bridge
+    name: frontend
+  default:
+    name: mynetwork

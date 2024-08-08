@@ -1,0 +1,15 @@
+services:
+  db:
+    image: mongo
+    volumes:
+      - type: volume
+        source: mydb
+        target: /data/db
+  #sever:
+
+
+
+volumes:
+  mydb:
+    external: true
+      

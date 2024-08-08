@@ -4,4 +4,22 @@ services:
     image: alpine
     command: ["ls"]
   b:
-    build: .
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - type: bind
+        source: ./data
+        target: /app/data
+      - type: volume
+        source: datavolume
+        target: /app/datavolume
+      - type: volume
+        target: /app/datavolumeanonymous
+    
+  
+volumes:
+  datavolume:
+   # external: true

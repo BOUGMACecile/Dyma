@@ -25,3 +25,11 @@ services:
         target: /app/src
     ports:
       - 3001:80
+  db:
+    image: mongo
+    volumes:
+      - type: volume
+        source: dbtest
+        target: /data/db
+volumes:
+  dbtest:

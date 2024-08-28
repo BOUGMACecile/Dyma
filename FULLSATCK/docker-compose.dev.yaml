@@ -3,6 +3,8 @@ services:
     build: 
       context: ./client
       dockerfile: Dockerfile.dev
+    environment:
+      WATCHPACK_POLLING: "true"
     ports:
       - 3000:3000
   
@@ -13,3 +15,13 @@ services:
       - type: volume
         target: /home/node_modules
   
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./api/src
+        target: /app/src
+    ports:
+      - 3001:80

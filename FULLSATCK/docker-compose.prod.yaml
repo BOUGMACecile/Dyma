@@ -3,6 +3,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile.prod
+    restart: unless-stopped
   api:
     build:
       context: ./api
@@ -11,8 +12,11 @@ services:
       - ./api/.env
     environment: 
       NODE_ENV: production
-    ports:
-      - 80:80
+    restart: unless-stopped
+    depends_on: 
+      - db
+  
+    
   db:
     image: mongo
     volumes:
@@ -21,6 +25,19 @@ services:
         target: /data/db
     env_file:
       - ./db/.env
+    restart: unless-stopped
+
+  reverse-proxy:
+    build:
+      context: ./reverse-proxy
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:80
+    restart: unless-stopped
+    depends_on:
+      - api
+      - db
+      - client
 
 volumes:
   dbprod:

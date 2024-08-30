@@ -7,7 +7,7 @@ services:
   api:
     build:
       context: ./api
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     env_file:
       - ./api/.env
     environment: 

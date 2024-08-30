@@ -11,3 +11,18 @@ services:
       - ./api/.env
     environment: 
       NODE_ENV: production
+    ports:
+      - 80:80
+  db:
+    image: mongo
+    volumes:
+      - type: volume
+        source: dbprod
+        target: /data/db
+    env_file:
+      - ./db/.env
+
+volumes:
+  dbprod:
+    external: true
+      

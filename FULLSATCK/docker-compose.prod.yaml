@@ -1,0 +1,13 @@
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    env_file:
+      - ./api/.env
+    environment: 
+      NODE_ENV: production
